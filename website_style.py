@@ -1,3 +1,9 @@
+# I am extending and overwriting pybtex's UnsrtStyle here.
+# I change the following:
+# - Simplified URL and DOI labels
+# - surround titles with "
+# - Remove the "IN" for conference proceedings
+
 from pybtex.style.formatting.unsrt import Style as UnsrtStyle
 from pybtex.style.formatting import toplevel
 
@@ -5,12 +11,10 @@ from pybtex.style.template import (
     join, words, together, field, optional, first_of,
     names, sentence, tag, optional_field, href, Node
 )
-from pybtex.richtext import Text, Symbol
-import re
 
 
 
-# Use only year labels for sections, sort by year, month, and then title in descending order
+# Initialize to use only year labels for sections, sort by year, month, and then title in descending order
 class Style(UnsrtStyle):
     default_sorting_style = 'year_month_title'
     default_label_style = 'year'
@@ -38,7 +42,7 @@ class Style(UnsrtStyle):
             'DOI'
             ]
 
-# Copy
+# Overwrite title style: surround with " "
     def format_title(self, e, which_field, as_sentence=True):
         formatted_title = field(
             which_field, apply_func=lambda text: text.capitalize()
@@ -48,15 +52,13 @@ class Style(UnsrtStyle):
             formatted_title,
             '"'
         ]
-#        print(type(formatted_title))
-#        formatted_title = Text('"', formatted_title, '"')
-#        formatted_title.children.append( Node('"','"') )
         if as_sentence:
             return sentence [ formatted_title ]
         else:
             return formatted_title
 
-# Overwrite: Remove 'IN' from proceedings
+# Overwrite: Remove 'IN' from proceedings.
+# THIS DOES NOT WORK - NO IDEA WHY....got too annoyed by it so I gave up on fixing...
     def get_inproceedings_template(self, e):
         template = toplevel [
             sentence [self.format_names('author')],
@@ -76,7 +78,7 @@ class Style(UnsrtStyle):
         ]
         return template
 
-
+# Overwrite: Remove 'IN' from proceedings.
     def get_incollection_template(self, e):
         template = toplevel [
             sentence [self.format_names('author')],

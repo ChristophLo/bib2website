@@ -13,10 +13,11 @@ Run setup.bat (or the two Python commands in it). It installs pybtex, and regist
 
 ## Using
 
-Just `run python` convert. Currently, it is hardcoded to load a file named `all.bib` in the project's root folder,  
+Just run `python convert`. Currently, it is hardcoded to load a file named `all.bib` in the project's root folder,  
 and generate `all.html`.
 
-In order to have PDF links, the URL field in the bibtex file should be used. 
+In order to have PDF links, the URL field in the bibtex file should be used. I use another github project to host 
+all my fulltext files.
 When using the month field, either use "01", "02", etc., or "jan", "feb", etc. in order to have proper sorting.
 
 

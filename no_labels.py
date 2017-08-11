@@ -1,5 +1,7 @@
 from pybtex.style.labels import BaseLabelStyle
 
+# This is a label style which just returns whitespace instead of labels (which consequently means that the custom html
+# backend will simply ignore the label
 
 class LabelStyle(BaseLabelStyle):
 
